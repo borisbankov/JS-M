@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          const result = document.querySelector('.form-control');
+          const btn = document.querySelector('.btn-danger');
+          btn.addEventListener('click', () => {
+            result.value = eval(result.value); // изпълни написаното (пресметни)
+          });
+
+          document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault(); // спира презареждането на страницата при натискане на Enter в полето
+          });
+
+          result.addEventListener('keydown', (evt) => {
+            if(evt.code == 'Enter'){
+              result.value = eval(result.value); // изпълни написаното (пресметни)
+            }
+          });
+
+          const inputs = document.querySelectorAll('.btn-secondary, .btn-primary');
+          inputs.forEach(item => {
+            item.addEventListener('click', (e) => {
+              result.value = result.value + e.target.value; // при натискане на бутон се дописва неговото число/аритметична операция полето 
+            });
+          });
+
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-4">
+          <form action="">
+            <input type="text" class="form-control">
+            <div class="row gap-4 my-2 mx-0">
+              <input type="button" class="col btn btn-secondary" value="7">
+              <input type="button" class="col btn btn-secondary" value="8">
+              <input type="button" class="col btn btn-secondary" value="9">
+              <input type="button" class="col btn btn-primary" value="/">
+            </div>
+            <div class="row gap-4 mb-2 mx-0">
+              <input type="button" class="col btn btn-secondary" value="4">
+              <input type="button" class="col btn btn-secondary" value="5">
+              <input type="button" class="col btn btn-secondary" value="6">
+              <input type="button" class="col btn btn-primary" value="*">
+            </div>
+            <div class="row gap-4 mb-2 mx-0">
+              <input type="button" class="col btn btn-secondary" value="1">
+              <input type="button" class="col btn btn-secondary" value="2">
+              <input type="button" class="col btn btn-secondary" value="3">
+              <input type="button" class="col btn btn-primary" value="-">
+            </div>
+            <div class="row gap-4 mb-2 mx-0">
+              <input type="button" class="col btn btn-secondary" value="0">
+              <input type="button" class="col btn btn-primary" value=".">
+              <input type="button" class="col btn btn-danger" value="=">
+              <input type="button" class="col btn btn-primary" value="+">
+            </div>
+          </form>       
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

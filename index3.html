@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic JavaScript Highlighter</title>
+    <style>
+        .highlighted {
+            background-color: gold;
+            padding:4px;
+            margin: 8px;
+        }
+        textarea{
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+ 
+<textarea id="jsCode" rows="10" cols="50">
+document.querySelectorAll('.highlighted').forEach(item => { item.style.border = '2px solid red'; });
+document.querySelectorAll('.highlighted:nth-of-type(2n)').forEach(item => { item.style.border = '3px solid blue'; });
+document.querySelectorAll('.highlighted:nth-of-type(3n)').forEach(item => { item.style.border = '4px dashed green'; });
+document.querySelector('.highlighted:first-of-type').style.border = '5px dotted black';
+document.querySelector('.highlighted:last-of-type').style.border = '5px dotted black';
+const elements = document.querySelectorAll('.highlighted');
+if(elements.length % 2 == 0){
+   elements[elements.length/2 - 1].style.border='solid 10px pink';
+}
+
+elements[Number.parseInt(elements.length/2)].style.border='solid 10px pink';
+</textarea>
+ 
+<button id="code">Apply Code</button>
+ 
+<div class="highlighted">Element 1</div>
+<div class="highlighted">Element 2</div>
+<div class="highlighted">Element 3</div>
+<div class="highlighted">Element 4</div>
+<div class="highlighted">Element 5</div>
+<div class="highlighted">Element 6</div>
+<div class="highlighted">Element 7</div>
+
+ 
+<script>
+    document.querySelector('#code').addEventListener('click', (e) => {
+        const jsCode = document.querySelector('#jsCode').value;
+ 
+        try {
+            eval(jsCode);
+        } catch (error) {
+            console.error('Error in the provided JavaScript code:', error);
+        }
+        
+        const elements = document.querySelectorAll('.highlighted');
+		if(elements.length % 2 == 0){
+		   elements[elements.length/2 - 1].style.border='solid 10px pink';
+		}
+
+		elements[Number.parseInt(elements.length/2)].style.border='solid 10px pink';
+
+        // document.querySelectorAll('.highlighted')
+        // 	.forEach((item, index) => {
+        // 	 	if(index % 2 != 0){
+        // 	 		item.style.border = '3px solid blue';
+        // 	 	}
+		// });
+
+		// const oneElement = document.querySelectorAll('.highlighted');
+		// oneElement[0].style.border = '6px solid gray';
+    });
+</script>
+ 
+</body>
+</html
