@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        .circle {
+            border-radius: 50%;
+        }
         p{
             margin:12px 16px;
             color:white;
@@ -149,8 +152,53 @@
         // 10
         img.forEach(item => {
             item.addEventListener('mouseover', (e) => {
-                item.style.border = 'dotted 5px green';
+                // 10
+                // item.style.border = 'dotted 5px green';
+                // 13
+                item.style.border = 'dotted 15px ' + colors[Math.floor(Math.random()*colors.length)];
+                // item.style.border = `dotted 5px ${colors[Math.floor(Math.random()*colors.length)]}`;
             });
+        });
+        // 11
+
+        const links = $$('a');
+        links.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.body.style.background = 
+                '#' + Math.floor(Math.random()*256*256*256).toString(16).padStart(6, '0');
+            });
+        });
+        //12
+        let colors = ['green', 'orange', 'blue', 'purple', 'grey'];
+        
+        for (let i = 0; i < 10; i++){
+            console.log(colors[Math.floor(Math.random()*colors.length)]);
+        }
+
+        //14
+        // $$('p:first-of-type')[0].style.display = 'none';
+        // $$('p:last-of-type')[0].style.display = 'none';
+
+        $('p').style.display = 'none';
+        document.querySelector('p').style.display = 'none';
+        $('p:last-of-type').style.display = 'none';
+
+        //15
+        $$('*').forEach(item => {
+            item.addEventListener('mouseenter', (e) => {
+                e.target.classList.add('circle');
+            });
+            item.addEventListener('mouseleave', (e) => {
+                e.target.classList.remove('circle');
+            });
+        });
+
+        // 16
+
+        let nums = [2, 5, 100, -3];
+        $$('p').forEach((item, index) => {
+            item.innerText = item.innerText + nums[index];
         });
     </script>
 </body>
