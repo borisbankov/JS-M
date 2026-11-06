@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', function(event){
+            const btn = document.querySelector('.btn');
+            const field = document.querySelector('.form-control');
+
+            btn.addEventListener('click', (e) => {
+                
+                for(let i = 0; i < parseInt(field.value); i++){
+                    let original = document.querySelector('.card:last-of-type');
+                    console.log(original);
+                    let clone = original.cloneNode(true);
+                    clone.style.marginLeft = Number.parseInt(getComputedStyle(original).marginLeft) + 10 + 'px';
+                    original.parentNode.append(clone);
+                    let count = document.querySelectorAll('.card').length;
+                    clone.firstElementChild.innerText = 'Panel content ' + count + '.' + count;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-6 mx-auto form-group">
+                <label for="">Въведете брой:</label>
+                <input type="text" class="form-control my-2">
+                <input type="button" class="btn btn-primary my-2" value="Създай">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 mx-auto">
+                <div class="card border-info my-2">
+                    <div class="card-body">
+                        Panel content 1
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

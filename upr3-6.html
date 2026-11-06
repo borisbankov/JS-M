@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function(event){
+            const btn = document.querySelector('.btn');
+            const field = document.querySelector('.form-control');
+            const even = document.querySelector('.list-group-item-info');
+            const odd = document.querySelector('.list-group-item-primary');
+
+            btn.addEventListener('click', (e) => {
+                let clone;
+                if(document.querySelectorAll('.list-group-item').length % 2 == 0){
+                    clone = even.cloneNode(true);
+                } else {
+                    clone = odd.cloneNode(true);
+                }
+                clone.innerText = field.value;
+                document.querySelector('.list-group').append(clone);
+            });
+        });
+    </script>
+</head>
+<body>
+ 
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+               <ul class="list-group">
+                    <li class="list-group-item list-group-item-info left my-2 ms-5 text-start rounded-3">Greetings</li>
+                    <li class="list-group-item list-group-item-primary right my-2 me-5 text-end rounded-3">Hello</li>
+                    <li class="list-group-item list-group-item-info left my-2 ms-5 text-start rounded-3">How can I help you?</li>
+                </ul>
+                <div>
+                    <div class="form-group ">
+                        <label>Съобщение</label>
+                        <input type="text" class="form-control" placeholder="въведете съобщение"/>
+                        <input type="button" class="form-control my-1 btn btn-success" value="изпрати"/>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+ 
+</body>
+</html>
