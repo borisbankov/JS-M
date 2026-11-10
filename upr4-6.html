@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <main class="container py-5">
+        <div class="card shadow-sm">
+            <div class="card-body p-4 p-md-5 text-center">
+                <h1 class="h3 mb-2">Изклюпи покемона</h1>
+                <p class="text-secondary">Измисли му име и виж как се излюпва!</p>
+                <div id="pokemon" class="display-1 my-4" >🥚</div>
+                <h2 id="pokemon-name" class="h4">Неименуван покемон</h2>
+                <p id="pokemon-status" class="text-secondary mb-4">Яйцето чака име...</p>
+                <label for="pokemon-input" class="form-label">Име на покемона</label>
+                <input id="pokemon-input" class="form-control" type="text" maxlength="12" placeholder="Например: Charmander">
+                <div class="form-text text-start">Въведи до 12 символа.</div>
+                <div class="progress mt-4" role="progressbar">
+                    <div id="growth-bar" class="progress-bar progress-bar-striped" style="width: 0%"></div>
+                </div>
+                <p id="character-count" class="small text-secondary mt-2 mb-0">0 / 12 символа</p>
+            </div>
+        </div>
+    </main>
+    <script>
+        // 0 символа — 🥚; 1–3 — 🐣; 4–7 — 🐲; 8–12 — 🐉.
+
+        document.querySelector('#pokemon-input').addEventListener('input', (e) => {
+            switch(e.target.value.length) {
+                case 0: document.querySelector('#pokemon').innerText = '🥚'; break;
+                case 1: 
+                case 2:
+                case 3: document.querySelector('#pokemon').innerText = '🐣'; break;
+                case 4: 
+                case 5:
+                case 6: 
+                case 7: document.querySelector('#pokemon').innerText = '🐲'; break;
+                case 8:
+                case 9:
+                case 10:
+                case 11: 
+                case 12: document.querySelector('#pokemon').innerText = '🐉'; break;
+                default: break;
+            }
+            document.querySelector('#pokemon-name').innerText = e.target.value;
+            document.querySelector('#character-count').innerText = e.target.value.length + ' / 12';
+            document.querySelector('#growth-bar').style.width = (100/12) * e.target.value.length + '%';
+            // document.querySelector('#pokemon').style.filter = 'sepia(1) saturate(5) hue-rotate(5deg)';
+
+        });
+    </script>
+</body>
+</html>

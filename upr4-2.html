@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            document.querySelector('.custom-select').addEventListener('change', (e) => {
+                const btn = document.querySelector('.btn');
+                // btn.className = 'btn ' + e.target.value;
+                let arr = btn.className.split(' '); 
+                for (let i = 0; i < arr.length; i++) {
+                    if(arr[i].indexOf('btn-') != -1){
+                        arr[i] = e.target.value;
+                    }
+                }
+                btn.className = arr.join(' ');
+            });
+            
+        });
+ 
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="col-6">
+            <select name="" id="" class="custom-select">
+                <option value="">Изберете цвят</option>
+                <option value="btn-success">зелен</option>
+                <option value="btn-danger">червен</option>
+                <option value="btn-warning">оранжев</option>
+                <option value="btn-primary">син</option>
+                
+            </select>
+            <div class="container mt-3">
+                <div class="form-group">
+                    <input type="button" class="btn btn-secondary" id="" value="Смени">
+ 
+                </div>
+ 
+            </div>
+        </div>
+    </div>
+</body>
+</html>

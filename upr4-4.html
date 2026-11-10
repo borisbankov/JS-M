@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            document.querySelectorAll('img').forEach(item => {
+                item.addEventListener('mouseover', (e) => {
+                    let temp = e.target.src;
+                    e.target.src = e.target.dataset.img;
+                    e.target.dataset.img = temp;
+                });
+            });
+
+            document.querySelectorAll('img').forEach(item => {
+                item.addEventListener('mouseout', (e) => {
+                    let temp = e.target.src;
+                    e.target.src = e.target.dataset.img;
+                    e.target.dataset.img = temp;
+                });
+            });
+
+            ['mouseover', 'mouseout'].forEach(event => {
+                document.querySelectorAll('img').forEach(item => {
+                    item.addEventListener(event, (e) => {
+                        let temp = e.target.src;
+                        e.target.src = e.target.dataset.img;
+                        e.target.dataset.img = temp;
+                    });
+                });
+            });
+        });
+ 
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <img src="https://placehold.co/300x350" alt="" data-img="https://www.boredpanda.com/blog/wp-content/uploads/2023/03/This-Artist-Creates-Adorable-Knit-and-Crochet-Hats-for-Her-Cat-6401c8657d7b9__700.jpg" width="300" height="350">
+            </div>
+            <div class="col">
+                <img src="https://placehold.co/300x350" alt="" data-img="https://www.boredpanda.com/blog/wp-content/uploads/2023/03/This-Artist-Creates-Adorable-Knit-and-Crochet-Hats-for-Her-Cat-6401c85088077__700.jpg" width="300" height="350">
+            </div>
+            <div class="col">
+                <img src="https://placehold.co/300x350" alt="" data-img="https://www.boredpanda.com/blog/wp-content/uploads/2023/03/This-Artist-Creates-Adorable-Knit-and-Crochet-Hats-for-Her-Cat-6401c8686eec8__700.jpg" width="300" height="350">
+            </div>
+            <div class="col">
+                <img src="https://placehold.co/300x350" alt="" data-img="https://www.boredpanda.com/blog/wp-content/uploads/2023/03/This-Artist-Creates-Adorable-Knit-and-Crochet-Hats-for-Her-Cat-6401c85563aee__700.jpg" width="300" height="350">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
