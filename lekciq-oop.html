@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let users = [{"id":1,"name":"Thomas","email":"thomas.smith@gmail.com","age": 22,"city":"New York"},{"id":2,"name":"Emma","email":"emma.j@gmail.com","age": 31, "city":"Chicago"},{"id":3,"name":"Michael","email":"michael.b@gmail.com","age": 46, "city":"New York"},{"id":4,"name":"Sarah","email":"sarah.d@gmail.com","age": 18,"city":"Los Angeles"},{"id":5,"name":"Robert","email":"robert.w@gmail.com","age": 21,"city":"Chicago"},{"id":6,"name":"Jessica","email":"jessica.m@gmail.com","age": 32,"city":"Houston"},{"id":7,"name":"David","email":"david@gmail.com","age": 19, "city":"Phoenix"},{"id":8,"name":"Jennifer","email":"jennifer.t@gmail.com","age": 35,"city":"Los Angeles"},{"id":9,"name":"Peter","email":"peter@gmail.com","age": 22, "city":"New York"},{"id":10,"name":"Lisa","email":"lisa@gmail.com","age": 46, "city":"Chicago"}];
+
+        let r = users.reduce((cityArr, u) => {
+            if(!cityArr.includes(u.city)) {
+                cityArr.push(u.city);
+            }
+            return cityArr;
+        }, []);
+        console.log(r);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

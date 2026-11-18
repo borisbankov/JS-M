@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', (e) => {
+            let data = [{"companyName":"Tech Innovators","jobPosition":"Front-End Developer","companyCity":"San Francisco","companyLogo":"https://ps.w.org/lightgallerywp/assets/icon-256x256.png?rev=2659780","technologies":["HTML","CSS","JavaScript"],"labels":["Promoted","Internship"],"date":"2d","hours":"Full Time"},{"companyName":"NextGen Solutions","jobPosition":"Full-Stack Developer","companyCity":"New York","companyLogo":"https://ps.w.org/nextgen-gallery/assets/icon-128x128.png?rev=2083961","technologies":["HTML","CSS","JavaScript","Node.js","MongoDB"],"labels":["Remote"],"date":"3d","hours":"Flexible"},{"companyName":"Digital Enterprises","jobPosition":"UI/UX Designer","companyCity":"Los Angeles","companyLogo":"https://ps.w.org/bloom-desktop-store-locator/assets/icon-128x128.png?rev=3780538","technologies":["HTML","CSS","JavaScript","Photoshop","Illustrator"],"labels":["NEW!"],"date":"14d","hours":"Part Time"},{"companyName":"CloudWorks","jobPosition":"Back-End Developer","companyCity":"Chicago","companyLogo":"https://ps.w.org/gallery-videos/assets/icon-128x128.png?rev=2857063","technologies":["Python","Django","MySQL"],"labels":["Popular"],"date":"1m","hours":"Full Time"},{"companyName":"Code Wizards","jobPosition":"Software Engineer","companyCity":"Seattle","companyLogo":"https://ps.w.org/phraseanet-client/assets/icon-256x256.png?rev=2686624","technologies":["JavaScript","React","Node.js"],"labels":["Popular"],"date":"1m","hours":"Full Time"},{"companyName":"Data Specialists","jobPosition":"Data Scientist","companyCity":"Boston","companyLogo":"https://ps.w.org/stubli/assets/icon-128x128.png?rev=3771818","technologies":["Python","R","SQL","Tableau"],"labels":["Internship"],"date":"2m","hours":"Part Time"},{"companyName":"Mobile Experts","jobPosition":"Mobile Developer","companyCity":"Austin","companyLogo":"https://ps.w.org/logo-showcase-ultimate/assets/icon-256x256.png?rev=2875105","technologies":["Java","Swift","Objective-C","Android SDK","iOS SDK"],"labels":[],"date":"2m","hours":"Flexible"},{"companyName":"Big Data Solutions","jobPosition":"Big Data Engineer","companyCity":"San Diego","companyLogo":"https://ps.w.org/foogallery-migrate/assets/icon-256x256.png?rev=2856451","technologies":["Hadoop","Spark","Java","Scala"],"labels":["Promoted","Internship"],"date":"3m","hours":"Part time"},{"companyName":"E-Commerce Innovations","jobPosition":"E-Commerce Developer","companyCity":"San Jose","companyLogo":"https://ps.w.org/leadin/assets/icon-128x128.png?rev=3041936","technologies":["Magento","PHP","MySQL"],"labels":["NEW!"],"date":"3m","hours":"Flexible"},{"companyName":"Cloud Mavens","jobPosition":"Cloud Engineer","companyCity":"Houstan","companyLogo":"https://ps.w.org/gallery-images-ape/assets/icon-256x256.png?rev=1468073","technologies":[".NET","C#","Azure","AWS"],"labels":["Remote"],"date":"3m","hours":"Full Time"}];
+
+            // companyName
+            // jobPosition
+            // companyCity
+            // companyLogo
+            // technologies[]
+            // labels[]
+            // date
+            // hours
+
+            let init = (arr) => {
+                const original = document.querySelector('li');
+                if(arr.length == 0){
+                    arr = [...data];
+                }
+                arr.forEach(job => {
+                    let clone = original.cloneNode(true);
+                    clone.classList.remove('d-none');
+                    original.after(clone);
+                    clone.querySelector('.company-logo').src = job.companyLogo;
+                    clone.querySelector('.company-name').innerText = job.companyName;
+                    clone.querySelector('.company-offering').innerText = job.jobPosition;
+                    clone.querySelectorAll('.text-muted')[0].innerText = job.date;
+                    clone.querySelectorAll('.text-muted')[1].innerText = job.hours;
+                    clone.querySelectorAll('.text-muted')[2].innerText = job.companyCity;
+
+                    let originalLabel = document.querySelector('.bg-cyan');
+                    let existing = clone.querySelector('.bg-cyan').parentNode;
+                    clone.querySelectorAll('.bg-cyan').forEach(d => { d.remove(); });
+
+                    for(let i = 0; i< job.technologies.length; i++){
+                        let newLabel = originalLabel.cloneNode(true);
+                        newLabel.innerText = job.technologies[i];
+                        existing.append(newLabel);
+                        newLabel.classList.add('me-1', 'd-inline-block', 'my-1');
+                    }
+
+                });
+                original.classList.add('d-none');
+            }
+            // pri povtorno izvikvane, trqbva da se iz4istqt vsi4ki clonirani
+            init(data);
+
+            let checkboxes = document.querySelectorAll('input[type=checkbox]');
+            let checked = [];
+            checkboxes.forEach(item => {
+                item.addEventListener('change', (e) => {
+                    if(!checked.includes(e.target.id)){
+                        checked.push(e.target.id);
+                    }
+                    else {
+                        checked.splice(checked.indexOf(e.target.id), 1);
+                        // checked = checked.filter(d => { return d != e.target.id; });
+                    }
+
+                    let t = ["HTML", "CSS", "JavaScript"];
+                    console.log(t.some(proverka => { return proverka == "HTMLS";} ));
+                    // data.technologies.some(t => checked.includes(t))
+                    let filtered = data.filter(item => { 
+                        return item.technologies.some(t => checked.includes(t)); 
+                    });
+                    document.querySelectorAll('.list-group-item:not(.d-none)').forEach(i => { i.remove(); });
+                    console.log(filtered);
+                    init(filtered);
+                });
+            }); 
+        });
+    </script>   
+    <style>
+        #main{
+            background-position:top;
+            background:url('https://deepcloud.eu/6400.jpg');
+            background-color: white;
+            background-repeat: repeat-x;
+        }
+ 
+        .border-start-3{
+            border:0px;
+            border-left: 6px solid;
+            border-top-left-radius: 6px;
+            border-bottom-left-radius: 6px;
+            box-shadow: rgb(167 218 209 / 59%) 0px 6px 18px 0px;
+        }
+ 
+        .company-logo{
+            border:solid 2px black;
+            border-radius:32px;
+        }
+        .text-cyan{
+            color:#13d4c1;
+        }
+        .bg-cyan{
+            background: rgb(167 218 209 / 59%);
+        }
+ 
+        .border-cyan{
+            border:solid 2px #13d4c1;
+            box-shadow: rgb(167 218 209 / 59%) 0px 6px 18px 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid" id="main">
+        <div class="row p-4">
+            <div class="col text-center m-2">
+                <div class="d-block display-1">Job Listing App</div>
+                <div class="h2">presented by the VINS gang</div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-9 job-item">
+                <ul class="list-group">
+                    <li class="list-group-item border-success border-start-3 p-4 my-3 ">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <img src="https://ps.w.org/wp-easy-gallery/assets/icon-256x256.png?rev=1906112" alt="" class="company-logo img-fluid" width="64" title="Photo Magic">
+                            </div>
+                            <div class="col">
+                                <div class="d-block">
+                                    <span class="company-name text-cyan h5">Photo Magic</span>
+                                    <span class="badge rounded-pill text-bg-secondary mx-2">Promoted</span>
+                                    <span class="badge rounded-pill text-bg-dark mx-2">NEW!</span>
+                                </div>
+                                <h3 class="company-offering">Senior Frontend Developer</h3>
+                                <div class="row">
+                                    <span class="col text-muted">1d ago</span> &#9900;
+                                    <span class="col text-muted">Full Time</span> &#9900;
+                                    <span class="col text-muted">Varna</span> 
+                                </div>
+                            </div>
+                            <div class="col ">
+                                <a class="bg-cyan text-dark px-3 py-2 rounded text-decoration-none" href="#!">HTML</a>
+                                <a class="bg-cyan text-dark px-3 py-2 rounded text-decoration-none" href="#!">CSS</a>
+                                <a class="bg-cyan text-dark px-3 py-2 rounded text-decoration-none" href="#!">JavaScript</a>
+                            </div>          
+                        </div>
+                    </li>
+                </ul>
+                
+            </div>
+            <div class="col-3">
+                <div class="border-cyan p-3 my-3">
+                <strong>Filter</strong>
+                <span class="d-block display-6">Technology</span>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="HTML">
+                  <label class="form-check-label" for="HTML">
+                    HTML
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="CSS">
+                  <label class="form-check-label" for="CSS">
+                    CSS
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="JavaScript">
+                  <label class="form-check-label" for="JavaScript">
+                    JavaScript
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Python">
+                  <label class="form-check-label" for="Python">
+                    Python
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Ruby">
+                  <label class="form-check-label" for="Ruby">
+                    Ruby
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="PHP">
+                  <label class="form-check-label" for="PHP">
+                    PHP
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id=".NET">
+                  <label class="form-check-label" for=".NET">
+                    .NET
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Node.js">
+                  <label class="form-check-label" for="Node.js">
+                    Node.js
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Java">
+                  <label class="form-check-label" for="Java">
+                    Java
+                  </label>
+                </div>
+ 
+                <span class="d-block display-6">Hours</span>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="FullTime">
+                  <label class="form-check-label" for="FullTime">
+                    Full Time
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="FullTime">
+                  <label class="form-check-label" for="FullTime">
+                    Flexible
+                  </label>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        
+    </script>
+</body>
+</html>
