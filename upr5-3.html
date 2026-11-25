@@ -64,7 +64,7 @@
                     }
 
                     let t = ["HTML", "CSS", "JavaScript"];
-                    console.log(t.some(proverka => { return proverka == "HTMLS";} ));
+                    // console.log(t.some(proverka => { return proverka == "HTMLS";} ));
                     // data.technologies.some(t => checked.includes(t))
                     let filtered = data.filter(item => { 
                         return item.technologies.some(t => checked.includes(t)); 
@@ -74,6 +74,18 @@
                     init(filtered);
                 });
             }); 
+
+            let arr3 = [1, 2, 5, 76];
+            let arr5 = [4, 6, 7, 2, 1];
+            let matches = [];
+            for(let i = 0; i < arr3.length; i++){
+                for(let j = 0; i < arr5.length; j++){
+                    if(arr3[i] == arr5[j]){
+                        if(!matches.incldues(arr5[j]));
+                        matches.push(arr5[j]);
+                    }
+                }
+            }
         });
     </script>   
     <style>

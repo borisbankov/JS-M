@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const canvas = document.getElementById('canvasId');
+      const context = canvas.getContext('2d');
+ 
+      const rectangle = new Path2D();
+      rectangle.rect(150, 75, 150, 50);
+      context.fillStyle = 'red';
+      context.fill(rectangle);
+ 
+      document.addEventListener('mousemove', (e) => {
+        mouse = e; 
+ 
+        if(context.isPointInPath(rectangle, mouse.x, mouse.y)) {
+          context.fillStyle = 'green';
+        }
+        else {
+          context.fillStyle = 'red';
+        }
+ 
+        context.fill(rectangle);
+      });
+    });
+ 
+    // const mousePlayer1 = (e) => {
+    //   return {
+    //     x: e.layerX,
+    //     y: e.layerY,
+    //   }
+    // }
+ 
+    </script>
+  <style type="text/css">
+  #canvasId{
+    background: black;
+  }
+  body{
+    margin:0;
+  }
+  </style>
+</head>
+  <body>
+    <canvas id="canvasId" width="700" height="600"></canvas>
+  </body>
+</html>

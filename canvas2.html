@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const canvas = document.getElementById("canvasId");
+            const context = canvas.getContext("2d");
+            let x=0, y=0, width=50, height=50;
+            context.fillStyle = 'green';
+            for (var i = 0; i < 5; i++) {
+               context.fillRect(x, y, width, height);
+               width = width + 10;
+               height = width;
+               // height = width += 10;
+               x = x + width;
+            }
+            
+            width = height = 50;
+            x = canvas.width - width;
+            y = 0;
+            for (var i = 0; i < 5; i++) {
+               context.fillRect(x, y, width, height);
+               width = width + 10;
+               height = width;
+               x = x - 10;
+               y = y + height;
+            }
+
+            width = height = 50;
+            x = canvas.width - width;
+            y = canvas.height - height;
+            for (var i = 0; i < 5; i++) {
+               context.fillRect(x, y, width, height);
+               width = width + 10;
+               height = width;
+               x = x - width - 10;
+               y = y - 10;
+            }
+
+            width = height = 50;
+            x = 0;
+            y = canvas.height - height;
+            for (var i = 0; i < 5; i++) {
+               context.fillRect(x, y, width, height);
+               width = width + 10;
+               height = width;
+               y = y - height - 10;
+            }
+
+            let r = 100;
+            x = canvas.width/2;
+            y = canvas.height/2;
+            for (var i = 0; i < 5; i++) {
+               context.fillStyle = i % 2 == 0 ? 'green' : 'red';
+               context.beginPath();
+               context.arc(x, y, r, 0, Math.PI*2);
+               context.closePath();
+               context.fill();
+               r = r - 20;
+               
+            }
+        });
+    </script>
+    <style>
+        #canvasId{
+            background:black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvasId" width="800" height="600"></canvas>
+</body>
+</html>

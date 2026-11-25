@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const canvas = document.getElementById("canvasId");
+            const context = canvas.getContext("2d");
+            let x=200, y=200, width=50, height=50;
+            context.fillStyle = 'yellow';
+
+            context.beginPath();
+            context.arc(x, y, 100, 0, Math.PI*2);
+            context.closePath();
+            context.fill();
+
+            context.beginPath();
+            context.rect(0, 0, 75, 100);
+            context.closePath();
+            context.fill();
+
+            context.fillStyle = 'red';
+            context.fillRect(x-width/2, y-height/2, width, height);
+
+            context.strokeStyle = 'white';
+            context.beginPath();
+            context.moveTo(0,0);
+            context.lineTo(400, 400);
+            context.closePath();
+            context.stroke();
+
+            context.strokeStyle = 'white';
+            context.beginPath();
+            context.moveTo(400,0);
+            context.lineTo(0, 400);
+            context.closePath();
+            context.stroke();
+        });
+    </script>
+    <style>
+        #canvasId{
+            background:black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvasId" width="400" height="400"></canvas>
+</body>
+</html>

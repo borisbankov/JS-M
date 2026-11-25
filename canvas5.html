@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+ 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let canvas = document.getElementById("canvasId");
+            let context = canvas.getContext("2d");
+            let mouse;
+            let activeIndex = -1;
+            let shapes = [];
+
+            document.querySelector('#drawShape').addEventListener('click', (e) => {
+                let color = '#' + Math.floor(Math.random()*255*255*255).toString(16).padStart(6, '0');
+                let posX = document.querySelector('#posX').value;
+                let posY = document.querySelector('#posY').value;
+                let sizeX = document.querySelector('#sizeX').value;
+                let sizeY = document.querySelector('#sizeY').value;
+                shapes.push({
+                    x: posX, 
+                    y: posY, 
+                    width: sizeX, 
+                    height: sizeY, 
+                    color: color, 
+                    active: false
+                });
+                context.fillStyle = shapes[shapes.length - 1].color;
+                context.beginPath();
+                context.rect(
+                    shapes[shapes.length - 1].x, 
+                    shapes[shapes.length - 1].y, 
+                    shapes[shapes.length - 1].width, 
+                    shapes[shapes.length - 1].height);
+                context.closePath();
+                context.fill();
+            });
+
+            let moveShape = (e) => {
+                shapes[activeIndex].x = e.offsetX - shapes[activeIndex].width/2;
+                shapes[activeIndex].y = e.offsetY - shapes[activeIndex].height/2;
+                draw(canvas, context, shapes);
+            }
+
+            canvas.addEventListener('click', (e) => {
+
+                for (var i = shapes.length - 1; i >= 0; i--) {
+
+                    context.rect(shapes[i].x, shapes[i].y, shapes[i].width, shapes[i].height);
+                    if(context.isPointInPath(e.x, e.y)){
+                        if(shapes[i].active == true) {
+                            canvas.removeEventListener('mousemove', moveShape);
+                            shapes[i].active = false;
+                            activeIndex = -1;
+                            break;
+                        } else {
+                            shapes[i].active = true;
+                            activeIndex = i;
+                            canvas.addEventListener('mousemove', moveShape)
+                            break;
+                        }
+                    }
+                }
+            });
+
+
+        });
+
+
+        let draw = (canvas, context, shapes) => {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            for (var i = 0; i < shapes.length; i++) {
+                context.fillStyle = shapes[i].color;
+                context.beginPath();
+                context.rect(shapes[i].x, shapes[i].y, shapes[i].width, shapes[i].height);
+                context.closePath();
+                context.fill();
+            }
+        }
+        </script>
+    <style type="text/css">
+    #canvasId{
+        background: black;
+    }
+ 
+    </style>
+</head>
+<body class="p-2">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-auto">
+                <canvas id="canvasId" class="d-block" width="800" height="600"></canvas>
+            </div>
+            <div class="col-3">
+ 
+                <div class="form-check">
+                    <div class="d-inline-block mx-4">
+                        <input type="radio" id="shape1" name="shape" class="form-check-input" value="Rect" >
+                        <label class="form-check-label" for="shape1">Четириъгълник</label>
+                    </div>
+                    <div class="d-inline-block mx-4">
+                        <input type="radio" id="shape2" name="shape" class="form-check-input" value="Circle">
+                        <label class="form-check-label" for="shape2">Окръжност</label>
+                    </div>
+                </div>
+ 
+                <div class="form-group mb-3">
+                    <label> Координат по X </label>
+                    <input class="form-control" id="posX" value="100"></input>
+                </div>
+                <div class="form-group mb-3">
+                    <label> Координат по Y </label>
+                    <input class="form-control" id="posY" value="100"></input>
+                </div>
+                <div class="form-group mb-3">
+                    <label> Широчина </label>
+                    <input class="form-control" id="sizeX" value="200"></input>
+                </div>
+                <div class="form-group mb-3">
+                    <label> Височина </label>
+                    <input class="form-control" id="sizeY" value="20"></input>
+                </div>
+                <div class="form-group d-grid">
+                    <input type="button" class="btn btn-info text-white" id="drawShape" value="Създай">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

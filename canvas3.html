@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let canvas = document.getElementById("canvasId");
+            let context = canvas.getContext("2d");
+            let mouse;
+ 
+            const points = () =>{
+                context.beginPath();
+                context.moveTo(150, 50);
+                context.lineTo(225, 200);
+                context.lineTo(75, 100);
+                context.lineTo(225, 100);
+                context.lineTo(75, 200);
+                context.lineTo(150, 50);
+                context.closePath();
+            }
+ 
+            context.strokeStyle = "white";
+            points();
+            context.stroke();
+ 
+            document.addEventListener("click", (e) => {
+                mouse = e;
+                console.log(e);
+                points();
+                if(context.isPointInPath(mouse.x, mouse.y)){
+                    alert("yes");
+                } else {
+                    alert("no");
+                }
+            });
+        });
+ 
+        // const mousePlayer1 = (e) => {
+        //     return {
+        //         x: x,
+        //         y: y,
+        //     }
+        // }
+        </script>
+    <style type="text/css">
+        #canvasId{
+            background: black;
+        }
+        body{
+            margin: 0;
+        }
+    </style>
+</head>
+    <body>
+        <canvas id="canvasId" width="700" height="600"></canvas>
+    </body>
+</html>
